@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fenix SpA - Administración Profesional de Copropiedad y Asesoría Empresarial</title>
+    <!-- Carga de Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuración para usar la fuente Inter y colores personalizados -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'fenix-blue': '#2563EB', // Azul para Confianza
+                        'fenix-green': '#10B981', // Verde para Crecimiento
+                        'fenix-bg': '#F9FAFB', // Fondo claro
+                        'fenix-dark': '#1F2937', // Texto oscuro
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- Carga de la fuente Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados para animaciones sutiles y scroll suave -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .phoenix-logo {
+            filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.5));
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-fenix-dark">
+
+    <!-- Navbar Fijo -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <a href="#inicio" class="flex-shrink-0 flex items-center">
+                    <!-- SVG Simple del Ave Fénix (Renovación) -->
+                    <svg class="h-8 w-8 text-fenix-blue phoenix-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10s-.4 1.4-2.7 2.2c-2.3.8-5.3.8-7.6 0-2.3-.8-2.7-2.2-2.7-2.2L12 2l4.6 8z"/>
+                        <path d="M12 22s-2.7-3.6-2.7-8.2c0-4.6 2.7-8.2 2.7-8.2v16z"/>
+                        <path d="M22 10l-2.7 2.2-7.6 0-2.7-2.2 4.6-8z"/>
+                    </svg>
+                    <span class="ml-2 text-xl font-extrabold text-fenix-dark">Fenix <span class="text-fenix-blue">SpA</span></span>
+                </a>
+                
+                <!-- Menú de Navegación (Desktop) -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#inicio" class="text-gray-600 hover:text-fenix-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Inicio</a>
+                        <a href="#servicios" class="text-gray-600 hover:text-fenix-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Servicios</a>
+                        <a href="#profesional" class="text-gray-600 hover:text-fenix-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Ley 21.442</a>
+                        <a href="#nosotros" class="text-gray-600 hover:text-fenix-blue px-3 py-2 rounded-md text-sm font-medium transition duration-150">Nosotros</a>
+                        <a href="#contacto" class="text-white bg-fenix-blue hover:bg-fenix-dark px-4 py-2 rounded-lg text-sm font-semibold shadow-lg transition duration-300">Solicitar Cotización</a>
+                    </div>
+                </div>
+
+                <!-- Botón de Menú Móvil (Hamburguesa) -->
+                <button id="mobile-menu-button" type="button" class="md:hidden p-2 rounded-md text-gray-700 hover:text-fenix-blue transition duration-150 focus:outline-none" aria-controls="mobile-menu" aria-expanded="false">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Menú Móvil (Oculto por defecto) -->
+        <div class="md:hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center bg-white border-t">
+                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-fenix-bg hover:text-fenix-blue">Inicio</a>
+                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-fenix-bg hover:text-fenix-blue">Servicios</a>
+                <a href="#profesional" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-fenix-bg hover:text-fenix-blue">Ley 21.442</a>
+                <a href="#nosotros" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-fenix-bg hover:text-fenix-blue">Nosotros</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium text-white bg-fenix-blue hover:bg-fenix-dark mt-2">Cotizar</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- 1. Sección Héroe (Inicio) -->
+        <section id="inicio" class="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-40 bg-fenix-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="md:grid md:grid-cols-12 md:gap-12 items-center">
+                    <div class="md:col-span-7 lg:col-span-7 xl:col-span-6 text-center md:text-left">
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-fenix-dark mb-4 fade-in">
+                            <span class="text-fenix-blue">Renueve</span> la Gestión de su Comunidad.
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 fade-in" style="transition-delay: 0.2s;">
+                            Más de 30 años de experiencia ejecutiva en finanzas y real estate, aplicados a la **Administración Profesional de Copropiedad** bajo la Ley 21.442.
+                        </p>
+                        <div class="flex justify-center md:justify-start space-x-4 fade-in" style="transition-delay: 0.4s;">
+                            <a href="#contacto" class="px-8 py-3 bg-fenix-blue text-white font-semibold rounded-xl shadow-xl hover:bg-fenix-dark transition duration-300 transform hover:scale-105">
+                                Lleve su Comunidad a un Nivel de Excelencia
+                            </a>
+                        </div>
+                        <blockquote class="mt-12 text-center md:text-left text-gray-500 italic text-md fade-in" style="transition-delay: 0.6s;">
+                            "Grandes cosas se hacen por una serie de pequeñas cosas reunidas"
+                            <footer class="mt-1 text-sm font-semibold text-fenix-green">— Vincent Van Gogh</footer>
+                        </blockquote>
+                    </div>
+                    
+                    <!-- Placeholder para Imagen Dinámica/Dashboard -->
+                    <div class="hidden md:block md:col-span-5 lg:col-span-5 xl:col-span-6 mt-10 md:mt-0 fade-in" style="transition-delay: 0.8s;">
+                        <div class="bg-white p-6 rounded-2xl shadow-2xl border-t-4 border-fenix-green">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-bold text-fenix-dark">Dashboard de Transparencia</h3>
+                                <div class="text-sm font-medium text-fenix-blue">100% Compliance</div>
+                            </div>
+                            <div class="h-40 bg-gray-100 rounded-lg flex items-center justify-center text-gray-400 text-sm">
+                                Gráfico de Fondos de Reserva y Cumplimiento (Placeholder)
+                            </div>
+                            <ul class="mt-4 space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center"><span class="text-fenix-green mr-2">•</span> Acceso 24/7 a información financiera.</li>
+                                <li class="flex items-center"><span class="text-fenix-green mr-2">•</span> Reportes generados por software especializado.</li>
+                                <li class="flex items-center"><span class="text-fenix-green mr-2">•</span> Gestión moderna y eficiente.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Sección de Servicios (Interactiva) -->
+        <section id="servicios" class="py-20 md:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <span class="text-fenix-blue font-bold uppercase tracking-widest fade-in">Nuestra Propuesta de Valor</span>
+                <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-fenix-dark mb-12 fade-in">Servicios Integrales para Empresas y Comunidades</h2>
+                
+                <!-- Contenedor de Pestañas -->
+                <div class="w-full lg:w-3/4 mx-auto fade-in">
+                    <div class="flex justify-center border-b border-gray-200 mb-8">
+                        <button id="tab-copropiedad" data-target="content-copropiedad" class="tab-button py-3 px-6 text-sm font-medium text-fenix-blue border-b-2 border-fenix-blue transition-colors duration-200">
+                            Administración de Copropiedad
+                        </button>
+                        <button id="tab-empresarial" data-target="content-empresarial" class="tab-button py-3 px-6 text-sm font-medium text-gray-500 hover:text-fenix-blue border-b-2 border-transparent hover:border-fenix-blue transition-colors duration-200">
+                            Gestión Empresarial (CFO Ext.)
+                        </button>
+                        <button id="tab-proyectos" data-target="content-proyectos" class="tab-button py-3 px-6 text-sm font-medium text-gray-500 hover:text-fenix-blue border-b-2 border-transparent hover:border-fenix-blue transition-colors duration-200">
+                            Evaluación de Proyectos
+                        </button>
+                    </div>
+
+                    <!-- Contenido de Pestañas -->
+                    <div id="content-copropiedad" class="tab-content text-left bg-fenix-bg p-8 rounded-xl shadow-lg border-l-4 border-fenix-blue">
+                        <h3 class="text-2xl font-bold mb-4 text-fenix-dark">Administración de Copropiedad Inmobiliaria</h3>
+                        <p class="text-gray-600 mb-6">
+                            Transformamos la administración bajo **Ley 21.442** en una actividad profesional, eficiente y transparente. Ofrecemos calidad de servicio y uso de herramientas modernas para la gestión de su comunidad.
+                        </p>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                            <li class="flex items-center">
+                                <span class="text-fenix-green text-xl mr-2">✓</span> Administradores certificados y reglamentos actualizados.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-green text-xl mr-2">✓</span> Transparencia total con información en línea.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-green text-xl mr-2">✓</span> Manejo eficiente de recursos y Fondo de Reserva.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-green text-xl mr-2">✓</span> Liderazgo en relaciones comunitarias y proveedores.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="content-empresarial" class="tab-content hidden text-left bg-fenix-bg p-8 rounded-xl shadow-lg border-l-4 border-fenix-green">
+                        <h3 class="text-2xl font-bold mb-4 text-fenix-dark">Gestión Empresarial y Soporte CFO Externo</h3>
+                        <p class="text-gray-600 mb-6">
+                            Apoyo estratégico administrativo y financiero para maximizar los beneficios de los inversores. Transferencia de expertise ejecutiva para elevar el estándar de gestión de su negocio.
+                        </p>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                            <li class="flex items-center">
+                                <span class="text-fenix-blue text-xl mr-2">📈</span> Planificación y control estratégico.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-blue text-xl mr-2">🗃️</span> Optimización de procesos administrativos.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-blue text-xl mr-2">💰</span> Gestión financiera y flujo de caja (cash flow).
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-blue text-xl mr-2">🤝</span> Asesoría integral para pequeñas y grandes empresas.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="content-proyectos" class="tab-content hidden text-left bg-fenix-bg p-8 rounded-xl shadow-lg border-l-4 border-fenix-dark">
+                        <h3 class="text-2xl font-bold mb-4 text-fenix-dark">Evaluación de Proyectos y Financiamientos</h3>
+                        <p class="text-gray-600 mb-6">
+                            Valoración y evaluación financiera de proyectos de inversión. Ayudamos a estructurar el financiamiento necesario para concretar sus planes.
+                        </p>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+                            <li class="flex items-center">
+                                <span class="text-fenix-dark text-xl mr-2">🔍</span> Análisis de viabilidad financiera.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-dark text-xl mr-2">🏗️</span> Estructuración de deuda y capital.
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-dark text-xl mr-2">📝</span> Modelos de valoración (VAN, TIR).
+                            </li>
+                            <li class="flex items-center">
+                                <span class="text-fenix-dark text-xl mr-2">🏦</span> Negociación con instituciones financieras.
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        
+        <!-- 3. Sección de Administración Profesional (Énfasis en Ley 21.442 - Simulación de Infografía) -->
+        <section id="profesional" class="py-20 md:py-28 bg-fenix-blue/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-fenix-blue font-bold uppercase tracking-widest fade-in">100% Legalidad y Transparencia</span>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-fenix-dark fade-in">Administración Profesional: El Estándar Ley 21.442</h2>
+                </div>
+                
+                <!-- INFOGRAFÍA DINÁMICA DE VALOR -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Columna 1: Transparencia (Tech) -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-fenix-blue fade-in">
+                        <div class="text-5xl text-fenix-blue mb-4">🖥️</div>
+                        <h3 class="text-xl font-bold mb-2">Transparencia Total</h3>
+                        <p class="text-gray-600 text-sm">Información clara y accesible 24/7. Uso de software especializado para reportes financieros auditables.</p>
+                        <p class="text-xs mt-3 text-fenix-blue font-medium">Verificación en tiempo real.</p>
+                    </div>
+
+                    <!-- Columna 2: Profesionalismo (Experiencia) -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-fenix-green fade-in" style="transition-delay: 0.2s;">
+                        <div class="text-5xl text-fenix-green mb-4">🏆</div>
+                        <h3 class="text-xl font-bold mb-2">Gestión Profesional y Eficiente</h3>
+                        <p class="text-gray-600 text-sm">Experiencia ejecutiva transferida a la gestión de copropiedad. Modernización de procesos y continuidad operacional.</p>
+                        <p class="text-xs mt-3 text-fenix-green font-medium">30+ Años de Expertise.</p>
+                    </div>
+
+                    <!-- Columna 3: Cumplimiento (Ley 21.442) -->
+                    <div class="p-6 bg-white rounded-xl shadow-lg border-t-4 border-fenix-dark fade-in" style="transition-delay: 0.4s;">
+                        <div class="text-5xl text-fenix-dark mb-4">⚖️</div>
+                        <h3 class="text-xl font-bold mb-2">100% Legal y Seguro</h3>
+                        <p class="text-gray-600 text-sm">Administradores certificados, cumplimiento riguroso de la Ley 21.442 y énfasis en la seguridad de la comunidad.</p>
+                        <p class="text-xs mt-3 text-fenix-dark font-medium">Paz y Seguridad Legal.</p>
+                    </div>
+                </div>
+
+                <!-- Simulación de Checklist / Quiz -->
+                <div class="mt-16 bg-white p-8 rounded-2xl shadow-2xl border-l-8 border-fenix-blue fade-in" style="transition-delay: 0.6s;">
+                    <h3 class="text-2xl font-bold text-fenix-dark mb-4">¿Está su Comunidad en Cumplimiento de la Ley 21.442?</h3>
+                    <p class="text-gray-600 mb-6">Verifique los pilares esenciales de una gestión moderna y legalmente sólida.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div class="flex items-center space-x-2 p-3 bg-fenix-bg rounded-lg">
+                            <input type="checkbox" id="check1" class="form-checkbox h-5 w-5 text-fenix-green rounded" checked disabled>
+                            <label for="check1" class="text-sm font-medium text-gray-700">Administrador Certificado</label>
+                        </div>
+                        <div class="flex items-center space-x-2 p-3 bg-fenix-bg rounded-lg">
+                            <input type="checkbox" id="check2" class="form-checkbox h-5 w-5 text-fenix-green rounded" checked disabled>
+                            <label for="check2" class="text-sm font-medium text-gray-700">Fondo de Reserva Operativo</label>
+                        </div>
+                        <div class="flex items-center space-x-2 p-3 bg-fenix-bg rounded-lg">
+                            <input type="checkbox" id="check3" class="form-checkbox h-5 w-5 text-fenix-green rounded" checked disabled>
+                            <label for="check3" class="text-sm font-medium text-gray-700">Reglamento Actualizado</label>
+                        </div>
+                        <div class="flex items-center space-x-2 p-3 bg-fenix-bg rounded-lg">
+                            <input type="checkbox" id="check4" class="form-checkbox h-5 w-5 text-fenix-green rounded" checked disabled>
+                            <label for="check4" class="text-sm font-medium text-gray-700">Información Financiera en Línea</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Sección Sobre Nosotros -->
+        <section id="nosotros" class="py-20 md:py-28 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-fenix-green font-bold uppercase tracking-widest fade-in">Liderazgo con Experiencia</span>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-fenix-dark fade-in">Nuestra Trayectoria Ejecutiva</h2>
+                </div>
+
+                <div class="lg:grid lg:grid-cols-3 lg:gap-12 items-center">
+                    <div class="lg:col-span-1 text-center lg:text-left mb-8 lg:mb-0 fade-in">
+                        <div class="w-32 h-32 mx-auto lg:mx-0 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden shadow-lg">
+                            <img src="https://placehold.co/128x128/9CA3AF/FFFFFF?text=Marcelo+M." alt="Foto de Marcelo Morales Villarroel" class="object-cover w-full h-full">
+                        </div>
+                        <h3 class="text-2xl font-bold mt-4 text-fenix-blue">Marcelo Morales Villarroel</h3>
+                        <p class="text-md text-gray-600">CPA, MBA, Fundador y Director</p>
+                        <p class="mt-4 text-sm text-gray-700">
+                            Líder con una sólida trayectoria en finanzas y gestión ejecutiva, incluyendo roles clave en instituciones como Metro de Santiago y SCL Terminal Aéreo. Nuestro compromiso es acompañar a los clientes, transfiriendo este nivel de expertise a su gestión.
+                        </p>
+                    </div>
+
+                    <!-- Timeline de Experiencia (Simulada) -->
+                    <div class="lg:col-span-2 relative fade-in" style="transition-delay: 0.3s;">
+                        <div class="border-l-2 border-fenix-green ml-4 pl-8 space-y-8">
+                            <div class="relative">
+                                <div class="absolute -left-10 top-0 h-4 w-4 bg-fenix-green rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-lg text-fenix-dark">2020 - Actual: Fenix SpA</h4>
+                                <p class="text-sm text-gray-600">Aplicando gestión ejecutiva a la copropiedad y asesoría empresarial.</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-10 top-0 h-4 w-4 bg-fenix-green rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-lg text-fenix-dark">2010 - 2020: Sector Infraestructura/Real Estate</h4>
+                                <p class="text-sm text-gray-600">Liderazgo en administración financiera y estratégica de grandes proyectos.</p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-10 top-0 h-4 w-4 bg-fenix-green rounded-full border-4 border-white"></div>
+                                <h4 class="font-bold text-lg text-fenix-dark">1995 - 2010: Telecomunicaciones y Finanzas</h4>
+                                <p class="text-sm text-gray-600">Experiencia en dirección de auditoría y procesos de transformación.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial Slider (Mockup) -->
+                <div class="mt-20 fade-in" style="transition-delay: 0.5s;">
+                    <h3 class="text-center text-2xl font-bold mb-8 text-fenix-dark">Lo que Dicen Nuestros Clientes</h3>
+                    <div class="w-full max-w-4xl mx-auto bg-fenix-bg p-8 rounded-xl shadow-inner border-l-4 border-fenix-blue">
+                        <p id="testimonial-text" class="italic text-lg text-gray-700 text-center mb-4">
+                            "Desde que Fenix SpA tomó la administración, la transparencia y la organización de nuestros fondos mejoraron drásticamente. El cambio a la Ley 21.442 fue impecable."
+                        </p>
+                        <p id="testimonial-author" class="text-fenix-blue font-semibold text-center">— Juan P., Comité de Administración, Condominio El Sol.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Sección de Contacto y CTA Final -->
+        <section id="contacto" class="py-20 md:py-28 bg-fenix-bg">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <span class="text-fenix-blue font-bold uppercase tracking-widest fade-in">El Primer Paso hacia la Excelencia</span>
+                    <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold text-fenix-dark fade-in">Contáctenos y Cotice su Asesoría</h2>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Formulario de Contacto -->
+                    <div class="bg-white p-8 rounded-2xl shadow-2xl fade-in">
+                        <h3 class="text-2xl font-bold mb-6 text-fenix-dark">Solicitud de Cotización Gratuita</h3>
+                        <form id="contact-form" class="space-y-4">
+                            <input type="text" placeholder="Nombre Completo" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-fenix-blue focus:border-fenix-blue transition duration-150">
+                            <input type="email" placeholder="Email de Contacto" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-fenix-blue focus:border-fenix-blue transition duration-150">
+                            <input type="tel" placeholder="Teléfono (+56 9...)" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-fenix-blue focus:border-fenix-blue transition duration-150">
+                            <textarea placeholder="Detalle su necesidad (Comunidad, Empresa, Proyecto)" rows="4" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-fenix-blue focus:border-fenix-blue transition duration-150"></textarea>
+                            <button type="submit" class="w-full px-4 py-3 bg-fenix-green text-white font-bold rounded-xl shadow-lg hover:bg-fenix-dark transition duration-300 transform hover:scale-[1.01]">
+                                Enviar Solicitud
+                            </button>
+                            <div id="form-message" class="mt-4 text-center text-sm font-medium text-fenix-blue hidden"></div>
+                        </form>
+                    </div>
+
+                    <!-- Datos de Contacto y Mapa -->
+                    <div class="space-y-8 fade-in" style="transition-delay: 0.2s;">
+                        <!-- Información -->
+                        <div class="bg-white p-8 rounded-2xl shadow-2xl h-full">
+                            <h3 class="text-2xl font-bold mb-4 text-fenix-dark">Información Clave</h3>
+                            <ul class="space-y-4 text-gray-700">
+                                <li class="flex items-center">
+                                    <svg class="w-6 h-6 mr-3 text-fenix-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2-3a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5z"></path></svg>
+                                    contacto@fenixspa.cl
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-6 h-6 mr-3 text-fenix-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                    +56 9 9626 7913
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-6 h-6 mr-3 text-fenix-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    Santiago, Chile
+                                </li>
+                            </ul>
+                            <!-- Mapa Placeholder -->
+                            <div class="mt-6 h-48 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
+                                Mapa Integrado (Google Maps Placeholder)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-fenix-dark text-white py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">&copy; 2024 Fenix SpA. Todos los derechos reservados.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#servicios" class="text-gray-400 hover:text-white transition duration-150">Servicios</a>
+                    <a href="#profesional" class="text-gray-400 hover:text-white transition duration-150">Ley 21.442</a>
+                    <a href="#nosotros" class="text-gray-400 hover:text-white transition duration-150">Nosotros</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript para Interactividad y Animaciones -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Manejo del Menú Móvil
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Cerrar menú móvil al hacer clic en un enlace
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+
+            // 2. Lógica de Pestañas de Servicios
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+
+                    // Desactivar todos los botones y contenidos
+                    tabButtons.forEach(btn => {
+                        btn.classList.remove('text-fenix-blue', 'border-fenix-blue');
+                        btn.classList.add('text-gray-500', 'border-transparent');
+                    });
+                    tabContents.forEach(content => {
+                        content.classList.add('hidden');
+                    });
+
+                    // Activar el botón y contenido seleccionado
+                    button.classList.add('text-fenix-blue', 'border-fenix-blue');
+                    button.classList.remove('text-gray-500', 'border-transparent');
+                    document.getElementById(targetId).classList.remove('hidden');
+                });
+            });
+
+            // 3. Animaciones Fade-In al hacer Scroll (Intersection Observer)
+            const faders = document.querySelectorAll('.fade-in');
+
+            const appearOptions = {
+                threshold: 0.2, // 20% del elemento visible
+                rootMargin: "0px 0px -100px 0px" // Empezar un poco antes de que llegue al fondo
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+            
+            // Iniciar la animación del Hero Banner inmediatamente
+            document.querySelector('#inicio h1').classList.add('visible');
+            document.querySelector('#inicio p').classList.add('visible');
+            document.querySelector('#inicio .flex').classList.add('visible');
+            document.querySelector('#inicio blockquote').classList.add('visible');
+
+
+            // 4. Manejo del Formulario de Contacto (Simulación)
+            const contactForm = document.getElementById('contact-form');
+            const formMessage = document.getElementById('form-message');
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                formMessage.classList.remove('hidden');
+                formMessage.classList.add('text-fenix-green');
+                formMessage.innerHTML = '¡Mensaje enviado con éxito! Nos contactaremos a la brevedad. Gracias por su interés en Fenix SpA.';
+                
+                // Resetear el formulario después de un breve delay
+                setTimeout(() => {
+                    contactForm.reset();
+                    formMessage.classList.add('hidden');
+                    formMessage.classList.remove('text-fenix-green');
+                }, 4000); 
+            });
+            
+            // 5. Simulación de Testimonial Slider
+            const testimonials = [
+                {
+                    text: "Desde que Fenix SpA tomó la administración, la transparencia y la organización de nuestros fondos mejoraron drásticamente. El cambio a la Ley 21.442 fue impecable.",
+                    author: "Juan P., Comité de Administración, Condominio El Sol."
+                },
+                {
+                    text: "Su asesoría como CFO externo fue vital para reestructurar nuestras finanzas y proyectar un crecimiento sostenible. Un equipo de altísimo nivel ejecutivo.",
+                    author: "María V., Gerente General, Empresa de Logística."
+                },
+                {
+                    text: "La experiencia en evaluación de proyectos nos permitió tomar una decisión de inversión con total certeza. Un servicio sólido y basado en la evidencia.",
+                    author: "Andrés G., Inversionista Privado."
+                }
+            ];
+            
+            let currentTestimonial = 0;
+            const testimonialText = document.getElementById('testimonial-text');
+            const testimonialAuthor = document.getElementById('testimonial-author');
+
+            function rotateTestimonials() {
+                testimonialText.textContent = testimonials[currentTestimonial].text;
+                testimonialAuthor.textContent = testimonials[currentTestimonial].author;
+                currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            }
+
+            // Rotar cada 6 segundos
+            setInterval(rotateTestimonials, 6000);
+            
+        });
+    </script>
+</body>
+</html>
